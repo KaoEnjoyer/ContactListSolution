@@ -1,7 +1,14 @@
-﻿@page "/"
+﻿@inject HttpClient Http
 
-<PageTitle>Home</PageTitle>
+<button @onclick="FetchData">Pobierz dane</button>
+<pre>@jsonData</pre>
 
-<h1>Hello, world!</h1>
+@code {
+    private string jsonData = "";
 
-Welcome to your new app.
+    private async Task FetchData()
+    {
+        var data = await Http.GetFromJsonAsync<object>("/api/TwojKontrolerAPI");
+        jsonData = System.Text.Json.JsonSerializer.Serialize(data);
+    }
+}

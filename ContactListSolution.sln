@@ -1,13 +1,19 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
-VisualStudioVersion = 17.14.36109.1 d17.14
+VisualStudioVersion = 17.14.36109.1
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ContactList.Client", "ContactList.Client\ContactList.Client.csproj", "{61DCDC53-DF75-4CDF-A9DF-A834FA1FF2A9}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ContactList.Server", "ContactList.Server\ContactList.Server.csproj", "{B3DFD6A2-6552-45C0-89F4-14B617328F7D}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ContactList.Shared", "ContactList.Shared\ContactList.Shared.csproj", "{510F3B7E-AFAB-4618-BA96-679D78C4FB35}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ContactList.Users", "ContactList.Users\ContactList.Users.csproj", "{BB051FD2-5ADD-47CC-BAF5-803B66DB06A8}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ContactList.Exceptions", "Exceprions\ContactList.Exceptions.csproj", "{C4B353B3-0416-4784-ABD9-71FABB01EF1F}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SQLContactsDatabase", "SQLContactsDatabase\SQLContactsDatabase.csproj", "{CFA7D441-110F-4D2D-96EA-34EEC6E5499D}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -27,6 +33,18 @@ Global
 		{510F3B7E-AFAB-4618-BA96-679D78C4FB35}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{510F3B7E-AFAB-4618-BA96-679D78C4FB35}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{510F3B7E-AFAB-4618-BA96-679D78C4FB35}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BB051FD2-5ADD-47CC-BAF5-803B66DB06A8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BB051FD2-5ADD-47CC-BAF5-803B66DB06A8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BB051FD2-5ADD-47CC-BAF5-803B66DB06A8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BB051FD2-5ADD-47CC-BAF5-803B66DB06A8}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C4B353B3-0416-4784-ABD9-71FABB01EF1F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C4B353B3-0416-4784-ABD9-71FABB01EF1F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C4B353B3-0416-4784-ABD9-71FABB01EF1F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C4B353B3-0416-4784-ABD9-71FABB01EF1F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{CFA7D441-110F-4D2D-96EA-34EEC6E5499D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CFA7D441-110F-4D2D-96EA-34EEC6E5499D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CFA7D441-110F-4D2D-96EA-34EEC6E5499D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CFA7D441-110F-4D2D-96EA-34EEC6E5499D}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

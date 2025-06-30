@@ -1,0 +1,176 @@
+﻿﻿@{
+@section head {
+	<style>
+		.btn {
+			margin: 3px;
+		}
+	</style>
+}
+
+@section leftBox {
+	<a id="edit" class="btn btn-primary col-12" role="button">Edytuj konto</a>
+	<button id="delete" class="btn btn-primary col-12" type="submit">Usuń konto</button>
+	<button id="logOut" class="btn btn-primary col-12" type="submit">Wyloguj się</button>
+}
+
+@section rightBox {
+	<div id="notFound">
+		<h1>UserNotFound</h1>
+	</div>
+
+	<div id="Login">
+		<h4>Login</h4>
+		<p></p>
+	</div>
+
+	<div id="Password">
+		<h4>Hasło</h4>
+		<p></p>
+	</div>
+
+	<div id="Email">
+		<h4>Email</h4>
+		<p></p>
+	</div>
+
+	<div id="Id">
+		<h4>Numer konta</h4>
+		<p></p>
+	</div>
+
+	<div id="Roles">
+		<h4>Uprawnienia</h4>
+	</div>
+}
+
+@section footer {
+	<script>
+
+		var user;
+
+		function DeleteUser(id)
+		{
+			$.ajax({
+				type: 'DELETE',
+				url: '/api/Users/' + id,
+				succes: function ()
+				{
+					alert('Konto zostało usunięte.');
+					window.location = '/Home/Index';
+				},
+				error: function() {
+					alert('Nie udało sie usunąć konta.');
+				}
+			});
+		}
+
+		function GetUser(id)
+		{
+			document.body.style.cursor = 'wait';
+			$.ajax({
+				type: 'GET',
+				url: '/api/Users/' + id,
+				success: function (result)
+				{
+					user = result;
+
+					$('#notFound').remove();
+
+					document.title = result.login;
+
+					$('#Login > p').text(result.login);
+					$('#Password> p').text(result.password);
+					$('#Email> p').text(result.email);
+					$('#Id > p').text(result.id);
+
+					document.body.style.cursor = 'default';
+				},
+				error: function ()
+				{
+					$('#Login').remove();
+					$('#Password').remove();
+					$('#Email').remove();
+					$('#Id').remove();
+					document.body.style.cursor = 'default';
+				}
+
+			});
+		}
+
+		function GetUserRoles(id)
+		{
+			document.body.style.cursor = 'wait';
+			$.ajax({
+				type: 'GET',
+				url: '/api/Roles/userRoles/' + id,
+				success: function (result)
+				{
+					var roles = '';
+
+					$.each(result,
+						function(i, role) {
+							roles += role.code + ' ';
+						});
+
+					$('#Roles').text(roles);
+
+					document.body.style.cursor = 'default';
+				},
+				error: function ()
+				{
+					$('#Roles').remove();
+					document.body.style.cursor = 'default';
+				}
+
+			});
+		}
+
+		function LogOut()
+		{
+			document.body.style.cursor = 'wait';
+			$.ajax({
+				type: 'POST',
+				url: '@Url.Action("Logout", "Users")',
+				success: function ()
+				{
+					document.body.style.cursor = 'default';
+				},
+				error: function ()
+				{
+					alert('Nie udało się wylogować.');
+					document.body.style.cursor = 'default';
+				}
+
+			});
+		}
+
+		$(document).ready(function ()
+		{
+			var array = window.location.pathname.split('/');
+			var userNumber = array[array.length - 1];
+			GetUser(userNumber);
+			GetUserRoles(userNumber);
+		});
+
+		$('#delete').on('click',
+			function ()
+			{
+				if (confirm('Czy na pewno chcesz usunąć konto?')) {
+					DeleteUser(user.id);
+				}
+			});
+
+		$('#edit').on('click',
+			function ()
+			{
+				window.location = '/Home/EditUser/' + user.id;
+			});
+
+		$('#logOut').on('click',
+			function () {
+				LogOut();
+				window.location = '/Home/Index';
+			});
+	</script>
+}
+}

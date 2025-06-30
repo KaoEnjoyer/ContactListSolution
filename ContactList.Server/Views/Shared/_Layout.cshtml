@@ -1,0 +1,103 @@
+﻿<!DOCTYPE html>
+<html lang="pl">
+<head>
+	<meta charset="utf-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+	<title>@ViewData["Title"] - bibliotekaNet2</title>
+	<link rel="stylesheet" href="~/lib/bootstrap-5.1.1-dist/css/bootstrap.css" />
+	<link rel="stylesheet" href="~/css/site.css" />
+	@RenderSection("head", required: false)
+</head>
+<body>
+	<header>
+		<nav class="navbar navbar-expand-lg navbar-light" id="navbar">
+			<div class="container-fluid">
+				<a class="navbar-brand mb-0 h1" id="brand" asp-area="" asp-controller="Home" asp-action="Index">Biblioteka</a>
+				<button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+					<span class="navbar-toggler-icon"></span>
+				</button>
+				<div class="collapse navbar-collapse" id="navbarSupportedContent">
+					<ul class="navbar-nav me-auto mb-2 mb-lg-0">
+						<li class="nav-item">
+							<a class="nav-link" asp-area="" asp-controller="Home" asp-action="Search">Wyszukaj</a>
+						</li>
+						<li id="account" class="nav-item">
+							<a class="nav-link" asp-area="" asp-controller="Home" asp-action="Login">Zaloguj się</a>
+						</li>
+						<li class="nav-item">
+							<a class="nav-link" asp-area="" asp-controller="Home" asp-action="AddBook">Dodaj książkę</a>
+						</li>
+						<li class="nav-item">
+							<a class="nav-link" asp-area="" asp-controller="Home" asp-action="Register">Dodaj książkę</a>
+						</li>
+					</ul>
+
+					<form class="d-flex">
+						<ul class="navbar-nav me-auto mb-2 mb-lg-0">
+							<li class="nav-item dropdown">
+								<a class="nav-link dropdown-toggle" href="" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+									Wybierz język
+								</a>
+								<ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+									<li><a class="dropdown-item" href="#">Polski</a></li>
+									<li><a class="dropdown-item" href="#">Angielski</a></li>
+								</ul>
+							</li>
+						</ul>
+					</form>
+				</div>
+			</div>
+		</nav>
+	</header>
+
+	<div class="container">
+		<main role="main" class="row" id="main">
+			<div class="col-sm-12 col-lg-3 rounded text-center" id="leftBox">
+				@RenderSection("leftBox")
+			</div>
+			<div class="col-sm-12 col-lg-9 rounded text-center" id="rightBox">
+				@RenderSection("rightBox")
+			</div>
+		</main>
+	</div>
+
+	<footer class="border-top footer text-muted rounded">
+		<div class="container navbar-light" id="footer">
+			&copy; 2021 - biblioteka - <a class="link-dark" id="footerLink" asp-area="" asp-controller="Home" asp-action="Statute">Regulamin korzystania z biblioteki</a>
+		</div>
+	</footer>
+
+	<script src="~/lib/jquery/dist/jquery.min.js"></script>
+	<script src="~/lib/bootstrap-5.1.1-dist/js/bootstrap.js"></script>
+	<script src="~/js/site.js" asp-append-version="true"></script>
+	@RenderSection("footer", false)
+
+	<script>
+		function CheckCookie()
+		{
+			var cookies = document.cookie.split(';');
+			$.each(cookies,
+				function(i, cookie) {
+					if (cookie.includes('UserId')) {
+						console.log(cookie);
+						var id = cookie.split('=');
+						console.log(id);
+						console.log(id[id.length - 1]);
+						$('#account > a').text('Moje konto');
+						$('#account > a').attr('href', '/Home/User/' + id[id.length - 1]);
+					}
+				});
+		}
+
+
+
+
+		$(document).ready(function ()
+		{
+
+			CheckCookie();
+		});
+	</script>
+
+</body>
+</html>

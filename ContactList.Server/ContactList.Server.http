@@ -1,49 +1,9 @@
 @ContactList.Server_HostAddress = http://localhost:5217
 
-GET {{ContactList.Server_HostAddress}}/weatherforecast/
-Accept: application/json
-
-###
-
-POST {{ContactList.Server_HostAddress}}/api/auth/register
+POST {{ContactList.Server_HostAddress}}/api/Users/logout/
 Content-type: application/json
 {
   "Username": "Jan Nowak",
-  "Email": "jan@nowak.pl",
   "Password": "SuperSilneHaslo123!"
 }
 
-###
-POST {{ContactList.Server_HostAddress}}/api/auth/register
-Content-type: application/json
-{
-  "Username": "ada Nowak",
-  "Email": "jan@nodawak.pl",
-  "Password": "SuperSilneHaslo123!"
-}
-
-###
-GET {{ContactList.Server_HostAddress}}/api/auth
-Accept: application/json
-
-###
-
-GET {{ContactList.Server_HostAddress}}/api/contacts
-Accept: application/json
-###
-
-POST {{ContactList.Server_HostAddress}}/api/contacts
-Content-type: application/json
-{
-  "FirstName": "Jankontakt",
-  "LastName": "Nowakdwa",
-  "Email": "dadawdaw"
-}
-###
-POST {{ContactList.Server_HostAddress}}/api/auth/login
-Content-type: application/json
-{
-  "Username": "Jan Nowak",
-  "Email": "jan@nowak.pl",
-  "Password": "SuperSilneHaslo123!"
-}

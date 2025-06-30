@@ -1,0 +1,73 @@
+﻿#leftBox
+{
+    background-color: gray;
+    min-width: 193px;
+    padding: 20px;
+}
+
+#rightBox
+{
+    background-color: lightgray;
+    font-size: 1.2em;
+    padding: 20px;
+}
+
+#main
+{
+    padding-bottom: 30px;
+    padding-top: 30px;
+}
+
+body
+{
+    background-color: lightcyan;
+}
+
+#brand
+{
+    font-size: 35px;
+}
+
+#navbar
+{
+    font-size: 20px;
+    background-color: darkgray;
+}
+
+#footer
+{
+    background-color: darkgray;
+}
+
+#footerLink
+{
+    text-decoration: none;
+}
+
+footer .container
+{
+    max-width: 100%;
+}
+
+/* Sticky footer styles
+-------------------------------------------------- */
+html
+{
+    position: relative;
+    min-height: 100%;
+}
+
+body
+{
+    /* Margin bottom by footer height */
+    margin-bottom: 60px;
+}
+
+.footer
+{
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    white-space: nowrap;
+    line-height: 60px; /* Vertically center the text there */
+}

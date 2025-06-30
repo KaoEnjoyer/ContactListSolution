@@ -5,14 +5,9 @@ using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 
 namespace ContactList.Server.Data
 {
-    public class ContactListDbContext : IdentityDbContext<User>
+    public class ContactListDbContext
     {
-        public ContactListDbContext(DbContextOptions<ContactListDbContext> options)
-            : base(options)
-        {
-        }
-
-        public DbSet<Contact> Contacts { get; set; } = null!;
+       
     }
 }
 

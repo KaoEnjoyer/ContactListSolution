@@ -1,36 +1,53 @@
-using ContactList.Server.Data;
-using Microsoft.EntityFrameworkCore;
-using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
-using ContactList.Shared.Models;
-using Microsoft.AspNetCore.Identity;
+using ContactList.Users;
+using Microsoft.AspNetCore.Builder;
+using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Hosting;
+using Microsoft.Extensions.Logging;
 
-var builder = WebApplication.CreateBuilder(args);
+WebApplicationBuilder builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
+builder.Services.AddRazorPages();
 
-builder.Services.AddControllers();
-// Learn more about configuring OpenAPI at https://aka.ms/aspnet/openapi
-builder.Services.AddOpenApi();
+builder.Services.AddControllersWithViews();
+builder.Services.AddSingleton<IUsersDatabase, UsersDatabase>();
+builder.Services.AddSingleton<ITokens, Tokens>();
+//builder.Services.AddSingleton<ILogger, FileLogger>();
 
-builder.Services.AddDbContext<ContactListDbContext>(options =>
-    options.UseInMemoryDatabase("ContactListDataBase"));
+builder.Services.AddCors(c =>
+{
+    c.AddPolicy("Policy", policy => policy
+        .AllowAnyOrigin().AllowAnyHeader().AllowAnyMethod());
+});
 
-builder.Services.AddIdentity<User, IdentityRole>()
-    .AddEntityFrameworkStores<ContactListDbContext>()
-    .AddDefaultTokenProviders();
+WebApplication app = builder.Build();
 
-var app = builder.Build();
+//app.UseResponseMeasuree();
 
 // Configure the HTTP request pipeline.
-if (app.Environment.IsDevelopment())
+if (!app.Environment.IsDevelopment())
 {
-    app.MapOpenApi();
+    app.UseExceptionHandler("/Error");
+    // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
+    app.UseHsts();
 }
-
 app.UseHttpsRedirection();
-
+app.UseStaticFiles();
+app.UseRouting();
 app.UseAuthorization();
+app.MapRazorPages();
 
-app.MapControllers();
+app.UseCors(x => x
+    .AllowAnyMethod()
+    .AllowAnyHeader()
+    .AllowAnyOrigin());
+
+app.UseEndpoints(endpoints =>
+{
+    endpoints.MapControllerRoute(
+        name: "default",
+        pattern: "{controller=Home}/{action=Index}/{id?}");
+});
 
 app.Run();
+

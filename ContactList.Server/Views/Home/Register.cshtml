@@ -1,0 +1,82 @@
+﻿@{
+	ViewData["Title"] = "Zarejestruj się";
+}
+
+@section leftBox {
+}
+
+@section rightBox {
+	<div class="form-floating mb-3">
+		<input type="text" class="form-control" id="login" placeholder=" ">
+		<label for="login">Login</label>
+	</div>
+
+	<div class="form-floating mb-3">
+		<input type="email" class="form-control" id="email" placeholder=" ">
+		<label for="password">email</label>
+	</div>
+	<div class="form-floating mb-3">
+		<input type="password" class="form-control" id="password" placeholder=" ">
+		<label for="password">Hasło</label>
+	</div>
+
+	<div id="Alert" class="alert alert-danger" role="alert"></div>
+
+	<button id="loginButtnon" class="btn btn-primary" type="submit">Utwórz konto</button>
+}
+
+@section footer
+{
+	<script>
+		function ClearAlert()
+		{
+			$('#Alert').text('').hide();
+		}
+
+		ClearAlert();
+
+		function Login()
+		{
+			document.body.style.cursor = 'wait';
+
+			$.ajax({
+				type: 'POST',
+				url: '@Url.Action("Register", "Users")',
+				dataType: 'json',
+				contentType: 'application/json',
+				data: JSON.stringify({
+					Login: $('#login').val(),
+					Email: $('#email').val(),
+					Password: $('#password').val()
+				}),
+				success: function (result) {
+					ClearAlert();
+
+					document.body.style.cursor = 'default';
+
+					location.href = '@Url.Action("User", "Home")' + '/' + result.id;
+				},
+				error: function () {
+					ClearAlert();
+
+					$('#Alert').text('Niepoprawny login lub hasło.').show();
+
+					document.body.style.cursor = 'default';
+				}
+			});
+		}
+
+		$('#loginButtnon').on('click',
+			function () {
+				Login();
+			});
+
+		$(document).keypress(function(event){
+			var keycode = (event.keyCode ? event.keyCode : event.which);
+			if(keycode === '13') {
+				Login();
+			}
+		});
+
+	</script>
+}
