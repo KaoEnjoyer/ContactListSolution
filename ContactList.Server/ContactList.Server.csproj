@@ -22,10 +22,12 @@
   <ItemGroup>
     <ProjectReference Include="..\ContactList.Shared\ContactList.Shared.csproj" />
     <ProjectReference Include="..\ContactList.Users\ContactList.Users.csproj" />
+    <ProjectReference Include="..\ContactList.Contacts\ContactList.Contacts.csproj" />
     <ProjectReference Include="..\Exceprions\ContactList.Exceptions.csproj" />
   </ItemGroup>
 
   <ItemGroup>
+    <Folder Include="Views\Models\" />
     <Folder Include="wwwroot\" />
   </ItemGroup>
 

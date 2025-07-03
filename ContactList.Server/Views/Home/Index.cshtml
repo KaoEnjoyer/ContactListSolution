@@ -1,9 +1,55 @@
-﻿﻿@{
-ViewData["Title"] = "Index";
+@{
+    ViewData["Title"] = "Zaloguj się";
 }
+
+
+<h2>Lista kontaktów</h2>
+
+<table class="table">
+	<thead>
+	<tr>
+		<th>Imię</th>
+		<th>Nazwisko</th>
+		<th>Email</th>
+		<th>Kategoria</th>
+	</tr>
+	</thead>
+	<tbody id="contactsBody">
+	<!-- Wypełniane przez JavaScript -->
+	</tbody>
+</table>
 @section leftBox {
-		left index page
+	
 }
+
 @section rightBox {
-		right index page
+	<script>
+        fetch("/api/contacts")
+    .then(response => {
+        console.log("Response status:", response.status);
+        return response.json();
+    })
+    .then(data => { 
+        console.log("Received data:", data);
+        const tbody = document.getElementById("leftBox");
+        data.forEach(c => {
+            const row = document.createElement("tr");
+            row.innerHTML = `
+                <td>${c.FirstName}</td>
+                <td>${c.LastName}</td>
+                <td>${c.Email}</td>
+                <td>${c.Category}</td>
+            `;
+            tbody.appendChild(row);
+        });
+    })
+    .catch(err => {
+        console.error("Błąd podczas ładowania kontaktów:", err);
+    });
+    </script>
+}
+
+@section footer
+{
+    
 }

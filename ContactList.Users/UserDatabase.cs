@@ -39,11 +39,6 @@ namespace ContactList.Users
             var filter = Builders<User>.Filter.Eq(u => u.Login, loginRequest.Login);
             var user = collection.Find(u => u.Login == loginRequest.Login).ToList().FirstOrDefault();
 
-            //var results = collection.Find(_ => true);
-            //foreach (var result in results.ToList())
-            //{
-            //    Console.WriteLine($"{result.Id} imie: {result.Login} pass: {result.Password}");
-            //}
 
             if (user == null)
             {
@@ -79,51 +74,7 @@ namespace ContactList.Users
 
 
             return user;
-            //string connectionString = configuration.GetConnectionString("ContactList");
-            //using (SqlConnection connection = new(connectionString))
-            //{
-            //    connection.Open();
-
-            //    using (SqlCommand command = connection.CreateCommand())
-            //    {
-            //        command.CommandType = System.Data.CommandType.Text;
-            //        command.CommandText = "select * from Users where upper(Login) = @login";
-
-            //        command.Parameters.AddWithValue("login", loginRequest.Login.ToUpper());
-            //        command.Parameters.AddWithValue("password", loginRequest.Password);
-
-            //        SqlDataReader reader = command.ExecuteReader();
-            //        reader.Read();
-            //        if (reader.HasRows)
-            //        {
-            //            User user = GetUser(reader);
-            //            switch (user.PasswordFormat)
-            //            {
-            //                case "plainText":
-            //                    {
-            //                        if (user.Password != loginRequest.Password)
-            //                        {
-            //                            return null;
-            //                        }
-            //                        break;
-            //                    }
-            //                case "sha512":
-            //                    {
-            //                        string hash = CreateHash(loginRequest.Password);
-            //                        if (user.Password != hash)
-            //                        {
-            //                            return null;
-            //                        }
-            //                        break;
-            //                    }
-            //            }
-            //            return user;
-            //        }
-            //    }
-            //    connection.Close();
-            //}
-
-            //return null;
+           
         }
 
         public User Add(RegisterRequest registerRequest)
@@ -142,7 +93,6 @@ namespace ContactList.Users
             };
 
 
-             //user.Password = CreateHash(user.Password);
             collection.InsertOne(user);
 
 
@@ -154,34 +104,7 @@ namespace ContactList.Users
 
                 CheckUser(user);
             return user;
-            //user.Password = CreateHash(user.Password);
-
-            //using (SqlConnection connection = new(connectionString))
-            //{
-            //    connection.Open();
-
-            //    using (SqlCommand command = connection.CreateCommand())
-            //    {
-            //        command.CommandType = System.Data.CommandType.Text;
-            //        command.CommandText = "INSERT INTO [dbo].[Users] ([Password], [Login], [Email], [PasswordFormat])" +
-            //                              "OUTPUT inserted.Id " +
-            //                              "VALUES" +
-            //                              "(@password, @login, @email, @passwordFormat)";
-
-            //        command.Parameters.AddWithValue("password", user.Password);
-            //        command.Parameters.AddWithValue("login", user.Login);
-            //        command.Parameters.AddWithValue("email", user.Email);
-            //        command.Parameters.AddWithValue("passwordFormat", "sha512");
-
-            //        object id = command.ExecuteScalar();
-
-            //        user.Id = Convert.ToInt32(id);
-            //    }
-
-            //    connection.Close();
-            //}
-
-            //return user;
+            
         }
 
         public User Edit(int id, User user)
@@ -319,29 +242,7 @@ namespace ContactList.Users
 
 
             return connection.Find(u => u.Id == id).FirstOrDefault();
-            //using (SqlConnection connection = new(connectionString))
-            //{
-            //    connection.Open();
-
-            //    using (SqlCommand command = connection.CreateCommand())
-            //    {
-            //        command.CommandType = System.Data.CommandType.Text;
-            //        command.CommandText = "select * from Users where id = @id";
-
-            //        command.Parameters.AddWithValue("id", id);
-
-            //        SqlDataReader reader = command.ExecuteReader();
-            //        reader.Read();
-            //        if (reader.HasRows)
-            //        {
-            //            return null;
-            //           /// return GetUser(reader);
-            //        }
-            //    }
-            //    connection.Close();
-            //}
-
-            //return null;
+            
         }
 
         public int SelectCount(SearchUsersRequest searchUsersRequest)
@@ -383,18 +284,6 @@ namespace ContactList.Users
             return result;
         }
 
-        //private User GetUser(SqlDataReader reader)
-        //{
-        //    //User user = new User
-        //    //{
-        //    //    Id = (int)reader["id"],
-        //    //    Password = ReadString(reader, "password"),
-        //    //    Login = ReadString(reader, "login"),
-        //    //    Email = ReadString(reader, "email"),
-        //    //    PasswordFormat = ReadString(reader, "passwordFormat")
-        //    //};
-        //    return user;
-        //}
 
         private string ReadString(SqlDataReader reader, string fieldName)
         {

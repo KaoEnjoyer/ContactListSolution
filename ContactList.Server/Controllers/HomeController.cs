@@ -5,10 +5,6 @@ namespace ContactList.Server.Controllers;
    
         public class HomeController : Controller
         {
-            public IActionResult Book()
-            {
-                return View();
-            }
 
             public IActionResult Index()
             {
@@ -31,35 +27,20 @@ namespace ContactList.Server.Controllers;
             }
 
 
-    public IActionResult Statute()
-            {
-                return View();
-            }
-
-            public IActionResult AddBook()
-            {
-                return View();
-            }
-
-            public IActionResult EditBook()
-            {
-                return View();
-            }
-
             public IActionResult User()
             {
                 return View();
             }
+
+          
+
+          
 
             public IActionResult Forbidden()
             {
                 return View();
             }
 
-            //[ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
-            //public IActionResult Error()
-            //{
-            //    //return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
-            //}
+            
 
         }

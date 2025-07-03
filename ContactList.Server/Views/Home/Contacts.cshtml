@@ -1,58 +1,39 @@
-﻿@page "/contacts"
-@inject HttpClient Http
+﻿@page
+@model ContactList.Server.Views.Home.Index
+@{
+    ViewData["Title"] = "Lista kontaktów";
+}
 
 <h2>Lista kontaktów</h2>
 
-@if (contacts == null)
-{
-    <p><em>Ładowanie...</em></p>
-}
-else
-{
-    <table class="table">
-        <thead>
-            <tr>
-                <th>Imię</th>
-                <th>Nazwisko</th>
-                <th>Email</th>
-                <th>Kategoria</th>
-                <th></th>
-            </tr>
-        </thead>
-        <tbody>
-            @foreach (var c in contacts)
-            {
-                <tr>
-                    <td>@c.FirstName</td>
-                    <td>@c.LastName</td>
-                    <td>@c.Email</td>
-                    <td>@c.Category</td>
-                    <td>
-                        <a href="/contacts/@c.Id">Szczegóły</a> |
-                        <a href="/contacts/edit/@c.Id">Edytuj</a> |
-                        <button @onclick ="() => DeleteContact(c.Id)">Usuń</button>
-                    </td>
-                </tr>
-            }
-        </tbody>
-    </table>
-}
+<a asp-page="Create" class="btn btn-success">Dodaj nowy kontakt</a>
 
-@code {
-    private List<ContactDto>
-    ? contacts;
-
-    protected override async Task OnInitializedAsync()
+<table class="table mt-3">
+    <thead>
+    <tr>
+        <th>Imię</th>
+        <th>Nazwisko</th>
+        <th>Email</th>
+        <th>Kategoria</th>
+        <th></th>
+    </tr>
+    </thead>
+    <tbody>
+    @foreach (var contact in Model.Contacts)
     {
-    contacts = await Http.GetFromJsonAsync<List<ContactDto>>("api/contacts");
+        <tr>
+            <td>@contact.FirstName</td>
+            <td>@contact.LastName</td>
+            <td>@contact.Email</td>
+            <td>@contact.Category</td>
+            <td>
+                <a asp-page="Details" asp-route-id="@contact.Id">Szczegóły</a> |
+                <a asp-page="Edit" asp-route-id="@contact.Id">Edytuj</a> |
+                <form method="post" asp-page-handler="Delete" asp-route-id="@contact.Id" style="display:inline">
+                    <button type="submit" class="btn btn-sm btn-danger">Usuń</button>
+                </form>
+            </td>
+        </tr>
     }
-
-    private async Task DeleteContact(int id)
-    {
-        var response = await Http.DeleteAsync($"api/contacts/{id}");
-        if (response.IsSuccessStatusCode)
-        {
-            contacts = contacts.Where(c => c.Id != id).ToList();
-        }
-    }
-}
+    </tbody>
+</table>

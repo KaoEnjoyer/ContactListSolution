@@ -19,7 +19,7 @@ namespace ContactList.Users
 
         User Edit(int id, User user);
 
-        void Delete(int id);
+        void Delete(int  id);
 
         User Add(RegisterRequest registerRequest);
 

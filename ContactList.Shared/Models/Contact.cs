@@ -11,9 +11,20 @@ namespace ContactList.Shared.Models
 {
     public class Contact
     {
+
+        public Contact()
+        {
+            FirstName = "";
+            LastName = "";
+            Email = "";
+            Phone = "";
+            BirthDate = DateTime.Now;
+            Category = "";
+            Subcategory = "";
+        }
         [BsonId]
         [BsonRepresentation(BsonType.ObjectId)]
-        public int Id { get; set; }
+        public string Id { get; set; }
 
         public string FirstName { get; set; }
         public string LastName { get; set; }
@@ -23,12 +34,8 @@ namespace ContactList.Shared.Models
         public string Phone { get; set; }
 
         public DateTime? BirthDate { get; set; }
-
         public string Category { get; set; }
         public string? Subcategory { get; set; }
-
-        public string? AppUserId { get; set; }
-        public User? AppUser { get; set; }
 
     }
 }
